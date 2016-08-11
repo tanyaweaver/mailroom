@@ -4,7 +4,6 @@ DONOR_DICT = {}
 
 def initial_prompt():
     user_menu_choice = input('Choose: Thank You Letter or Report  ')
-    print(user_menu_choice)
     return user_menu_choice.lower()
 
 
@@ -26,15 +25,27 @@ def menu_choice_action(user_menu_choice):
 
 def name_prompt():
     donor_name_input = input('Enter Donor Name or List')
-    if donor_name_input.lower() == 'list':
-        print(DONOR_DICT.keys())
-        name_prompt()
-    elif isinstance(donor_name_input.lower(), str):
-        DONOR_DICT.setdefault(donor_name_input.lower(), [])
-        amount_prompt()
+    return donor_name_input
+
+
+def name_prompt_validator(donor_name_input):
+    if isinstance(donor_name_input, str) and donor_name_input != ' ':
+        return donor_name_input
     else:
         print('Invalid Input')
-        name_prompt()
+        return 'invalid input'
+
+
+# def name_input_action:
+#     if donor_name_input.lower() == 'list':
+#         print(DONOR_DICT.keys())
+#         name_prompt()
+#     elif isinstance(donor_name_input.lower(), str):
+#         DONOR_DICT.setdefault(donor_name_input.lower(), [])
+#         amount_prompt()
+#     else:
+#         print('Invalid Input')
+#         name_prompt()
 
 
 def create_report():
@@ -42,6 +53,6 @@ def create_report():
 
 
 def amount_prompt():
-
-    if isinstance(donor_amount.lower(), str):
-        donor_dict.setdefault(donor_name_input.lower(), []).append(donor_name_input.lower())
+    pass
+    # if isinstance(donor_amount.lower(), str):
+    #     donor_dict.setdefault(donor_name_input.lower(), []).append(donor_name_input.lower())

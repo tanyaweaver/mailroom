@@ -8,17 +8,30 @@ DONOR_DICT_TEST = {
     'davidson': [35, 28, 60]
 }
 
-INPUT_TABLE = [
+MENU_TABLE = [
     ('thank you letter', 'thank you letter'),
     ('report', 'report'),
     (123, 'invalid input')
 ]
 
-@pytest.mark.parametrize('u_input, result', INPUT_TABLE)
+
+NAME_TABLE = [
+    ('dan', 'dan'),
+    (' ', 'invalid input'),
+    (123, 'invalid input')
+]
+
+
+@pytest.mark.parametrize('u_input, result', MENU_TABLE)
 def test_initial_prompt_validator(u_input, result):
     from mailroom import initial_prompt_validator
-    assert initial_prompt_validator(u_input) == result 
+    assert initial_prompt_validator(u_input) == result
 
+
+@pytest.mark.parametrize('u_input, result', NAME_TABLE)
+def test_name_prompt_validator(u_input, result):
+    from mailroom import name_prompt_validator
+    assert name_prompt_validator(u_input) == result
 
 
 
