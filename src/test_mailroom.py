@@ -28,6 +28,15 @@ AMOUNT_TABLE = [
     ('a', 'invalid input'),
 ]
 
+
+DONOR_AMOUNT_TABLE = [
+    ('bill', 10, DONOR_DICT_TEST, ('bill', [10])),
+    ('baker', 100, DONOR_DICT_TEST, ('baker', [10, 20, 100])),
+    ('matt', 65, DONOR_DICT_TEST, ('matt', [65])),
+    ('williams', 43, DONOR_DICT_TEST, ('williams', [30, 40, 50, 43]))
+]
+
+
 @pytest.mark.parametrize('u_input, result', MENU_TABLE)
 def test_initial_prompt_validator(u_input, result):
     from mailroom import initial_prompt_validator
@@ -46,6 +55,10 @@ def test_amount_prompt_validator(u_input, result):
     assert amount_prompt_validator(u_input) == result
 
 
+@pytest.mark.parametrize('u_input, u_amount, dictionary, result', DONOR_AMOUNT_TABLE)
+def test_amount_to_dict(u_input, u_amount, dictionary, result):
+    from mailroom import amount_to_dict
+    assert amount_to_dict(u_input, u_amount, dictionary) == result
 
 # def test_name_prompt_elif(DONOR_DICT):
 #     from mailroom import name_prompt
