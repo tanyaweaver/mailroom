@@ -22,6 +22,12 @@ NAME_TABLE = [
 ]
 
 
+AMOUNT_TABLE = [
+    (1, 1),
+    (1.5, 1.5),
+    ('a', 'invalid input'),
+]
+
 @pytest.mark.parametrize('u_input, result', MENU_TABLE)
 def test_initial_prompt_validator(u_input, result):
     from mailroom import initial_prompt_validator
@@ -32,6 +38,12 @@ def test_initial_prompt_validator(u_input, result):
 def test_name_prompt_validator(u_input, result):
     from mailroom import name_prompt_validator
     assert name_prompt_validator(u_input) == result
+
+
+@pytest.mark.parametrize('u_input, result', AMOUNT_TABLE)
+def test_amount_prompt_validator(u_input, result):
+    from mailroom import amount_prompt_validator
+    assert amount_prompt_validator(u_input) == result
 
 
 
