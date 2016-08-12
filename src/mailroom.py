@@ -6,7 +6,11 @@ try:
     input = raw_input
 except NameError:
     pass
-DONOR_DICT = {}
+DONOR_DICT = {
+    'baker': [10.0, 20.0],
+    'williams': [30.0, 40.0, 50.0],
+    'davidson': [35.0, 28.0, 60.0]
+}
 
 
 def initial_prompt():
@@ -33,7 +37,7 @@ def initial_prompt_validator(user_menu_choice):
 
 def name_prompt():
     donor_name_input = input('Enter Donor Name or List  ')
-    return donor_name_input.lower
+    return donor_name_input.lower()
 
 
 def name_prompt_validator(donor_name_input):
@@ -68,7 +72,7 @@ def amount_prompt():
 def amount_prompt_validator(donation_amount):
     try:
         if int(donation_amount) or float(donation_amount):
-            return donation_amount
+            return float(donation_amount)
     except ValueError:
         print('Invalid Input')
         return 'invalid input'
@@ -81,9 +85,8 @@ def amount_to_dict(donor_name_input, donation_amount, dictionary):
 
 
 def generate_letter(donor_name_input, donation_amount):
-    print('Dear {0}, thank you for your donation of'
-          '{1}.').format(donor_name_input, donation_amount)
-    initial_prompt()
+    print('Dear {0}, thank you for your donation of '
+          '{1}.'.format(donor_name_input, donation_amount))
 
 
 def do_math(dictionary):
@@ -110,24 +113,28 @@ def create_report(list_sorted):
     return  print_out_list
 
 
+def name_prompt_call(donor_name):
+      DONOR_DICT.setdefault(donor_name.lower(), [])
+      donation_amount = amount_prompt_validator(amount_prompt())
+      amount_to_dict(donor_name, donation_amount, DONOR_DICT)
+      generate_letter(donor_name, donation_amount)
+
 def main_function():
-    user_menu_choice = initial_prompt_validator(initial_prompt())
+    user_menu_choice = initial_prompt_validator(initial_prompt())  
     if user_menu_choice == 'thank you letter':
         donor_name = name_prompt_validator(name_prompt())
         if donor_name == 'list':
             print(DONOR_DICT.keys())
-            name_prompt()
+            donor_name = name_prompt_validator(name_prompt())
         elif donor_name == 'invalid input':
-            name_prompt()
-        else:
-            DONOR_DICT.setdefault(donor_name.lower(), [])
-            donation_amount = amount_prompt_validator(amount_prompt())
-            amount_to_dict(donor_name, donation_amount, DONOR_DICT)
-            generate_letter(donor_name, donation_amount)
+            donor_name = name_prompt_validator(name_prompt())
+        name_prompt_call(donor_name)
+        main_function()
     elif user_menu_choice == 'report':
         create_report(do_math(DONOR_DICT))
+        main_function()
     else:
-        initial_prompt()
+        main_function()
 
 if __name__ == '__main__':
     main_function()

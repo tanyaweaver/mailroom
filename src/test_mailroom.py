@@ -3,16 +3,16 @@ import pytest
 
 DONOR_DICT_KEYS = ['baker', 'williams', 'davidson']
 DONOR_DICT_TEST = {
-    'baker': [10, 20],
-    'williams': [30, 40, 50],
-    'davidson': [35, 28, 60]
+    'baker': [10.0, 20.0],
+    'williams': [30.0, 40.0, 50.0],
+    'davidson': [35.0, 28.0, 60.0]
 }
 
 
 DONOR_DICT_TEST_1 = {
-    'baker': [10, 20],
-    'williams': [30, 40, 50],
-    'davidson': [35, 28, 60]
+    'baker': [10.0, 20.0],
+    'williams': [30.0, 40.0, 50.0],
+    'davidson': [35.0, 28.0, 60.0]
 }
 
 
@@ -38,23 +38,23 @@ AMOUNT_TABLE = [
 
 
 DONOR_AMOUNT_TABLE = [
-    ('bill', 10, DONOR_DICT_TEST, {'bill': [10], 'baker': [10, 20],
-                                                 'williams': [30, 40, 50],
-                                                 'davidson': [35, 28, 60]}),
-    ('baker', 100, DONOR_DICT_TEST, {'bill': [10],
-                                                       'baker': [10, 20, 100],
-                                                       'williams': [30, 40, 50],
-                                                       'davidson': [35, 28, 60]}),
-    ('matt', 65, DONOR_DICT_TEST, {'bill': [10], 'baker': [10, 20, 100],
-                                                 'williams': [30, 40, 50],
-                                                 'davidson': [35, 28, 60],
-                                                 'matt': [65]},)
+    ('bill', 10, DONOR_DICT_TEST, {'bill': [10.0], 'baker': [10.0, 20.0],
+                                                 'williams': [30.0, 40.0, 50.0],
+                                                 'davidson': [35.0, 28.0, 60.0]}),
+    ('baker', 100, DONOR_DICT_TEST, {'bill': [10.0],
+                                                       'baker': [10.0, 20.0, 100.0],
+                                                       'williams': [30.0, 40.0, 50.0],
+                                                       'davidson': [35.0, 28.0, 60.0]}),
+    ('matt', 65, DONOR_DICT_TEST, {'bill': [10.0], 'baker': [10.0, 20.0, 100.0],
+                                                 'williams': [30.0, 40.0, 50.0],
+                                                 'davidson': [35.0, 28.0, 60.0],
+                                                 'matt': [65.0]})
 ]
 
 MATH_CALC = [
-    ['baker', 30, 2, 15.0],
-    ['williams', 120, 3, 40.0],
-    ['davidson', 123, 3, 41.0]
+    ['baker', 30.0, 2, 15.0],
+    ['williams', 120.0, 3, 40.0],
+    ['davidson', 123.0, 3, 41.0]
 ]
 
 
@@ -62,16 +62,16 @@ DO_MATH_TABLE = [DONOR_DICT_TEST_1, MATH_CALC]
 
 
 SORTED_LIST = [
-        ['baker', 30, 2, 15.0],
-        ['williams', 120, 3, 40.0],
-        ['davidson', 123, 3, 41.0]
+        ['baker', 30.0, 2, 15.0],
+        ['williams', 120.0, 3, 40.0],
+        ['davidson', 123.0, 3, 41.0]
     ]
 
 
 RESULT = [
-                'baker 30 2 15.0',
-                'williams 120 3 40.0',
-                'davidson 123 3 41.0'
+                'baker 30.0 2 15.0',
+                'williams 120.0 3 40.0',
+                'davidson 123.0 3 41.0'
                 ]
 
 
