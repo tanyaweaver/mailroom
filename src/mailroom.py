@@ -1,5 +1,5 @@
 # -*- coding: utf -8 -*-
-#from builtins import (ascii, bytes, chr, dict, filter, hex, input, int, map, next, oct, open, pow, range, round, str, super, zip)
+# from builtins import (ascii, bytes, chr, dict, filter, hex, input, int, map, next, oct, open, pow, range, round, str, super, zip)
 # from __future__ import absolute_import, division, print_function
 from __future__ import division
 try:
@@ -22,13 +22,13 @@ def initial_prompt_validator(user_menu_choice):
         return 'invalid input'
 
 
-def menu_choice_action(user_menu_choice):
-    if user_menu_choice == 'thank you letter':
-        name_prompt()
-    elif user_menu_choice == 'report':
-        create_report()
-    else:
-        initial_prompt()
+# def menu_choice_action(user_menu_choice):
+#     if user_menu_choice == 'thank you letter':
+#         name_prompt()
+#     elif user_menu_choice == 'report':
+#         create_report(do_math(DONOR_DICT))
+#     else:
+#         initial_prompt()
 
 
 def name_prompt():
@@ -49,15 +49,15 @@ def name_prompt_validator(donor_name_input):
             return 'invalid input'
 
 
-def name_input_action(donor_name_input):
-    if donor_name_input == 'list':
-        print(DONOR_DICT.keys())
-        name_prompt()
-    elif donor_name_input == 'invalid input':
-        name_prompt()
-    else:
-        DONOR_DICT.setdefault(donor_name_input.lower(), [])
-        amount_prompt()
+# def name_input_action(donor_name_input):
+#     if donor_name_input == 'list':
+#         print(DONOR_DICT.keys())
+#         name_prompt()
+#     elif donor_name_input == 'invalid input':
+#         name_prompt()
+#     else:
+#         DONOR_DICT.setdefault(donor_name_input.lower(), [])
+#         amount_prompt()
 
 
 def amount_prompt():
@@ -76,7 +76,8 @@ def amount_prompt_validator(donation_amount):
 
 def amount_to_dict(donor_name_input, donation_amount, dictionary):
     dictionary.setdefault(donor_name_input, []).append(donation_amount)
-    return donor_name_input, dictionary[donor_name_input]
+    # return donor_name_input, dictionary[donor_name_input]
+    return dictionary
 
 
 def generate_letter(donor_name_input, donation_amount):
@@ -98,5 +99,35 @@ def do_math(dictionary):
     return sorted(summary_list, key=lambda x: x[1])
 
 
-def create_report():
-    pass
+def create_report(list_sorted):
+    # print('{:20} {:20} {:20} {:20}'
+    #       .format(['Name', 'Total', 'Count', 'Average']))
+    print_out_list = []
+    for individual_donor_list in list_sorted:
+        print_each_donor = ('{0} {1} {2} {3}'.format(*individual_donor_list))
+        print_out_list.append(print_each_donor)
+        print(print_each_donor)
+    return  print_out_list
+
+
+def main_function():
+    user_menu_choice = initial_prompt_validator(initial_prompt())
+    if user_menu_choice == 'thank you letter':
+        donor_name = name_prompt_validator(name_prompt())
+        if donor_name == 'list':
+            print(DONOR_DICT.keys())
+            name_prompt()
+        elif donor_name == 'invalid input':
+            name_prompt()
+        else:
+            DONOR_DICT.setdefault(donor_name.lower(), [])
+            donation_amount = amount_prompt_validator(amount_prompt())
+            amount_to_dict(donor_name, donation_amount, DONOR_DICT)
+            generate_letter(donor_name, donation_amount)
+    elif user_menu_choice == 'report':
+        create_report(do_math(DONOR_DICT))
+    else:
+        initial_prompt()
+
+if __name__ == '__main__':
+    main_function()
