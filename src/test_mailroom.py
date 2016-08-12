@@ -8,6 +8,14 @@ DONOR_DICT_TEST = {
     'davidson': [35, 28, 60]
 }
 
+
+DONOR_DICT_TEST_1 = {
+    'baker': [10, 20],
+    'williams': [30, 40, 50],
+    'davidson': [35, 28, 60]
+}
+
+
 MENU_TABLE = [
     ('thank you letter', 'thank you letter'),
     ('report', 'report'),
@@ -37,6 +45,16 @@ DONOR_AMOUNT_TABLE = [
 ]
 
 
+DO_MATH_TABLE = [
+    (DONOR_DICT_TEST_1, [
+        ['baker', 30, 2, 15.0],
+        ['williams', 120, 3, 40.0],
+        ['davidson', 123, 3, 41.0],
+    ]
+    )
+]
+
+
 @pytest.mark.parametrize('u_input, result', MENU_TABLE)
 def test_initial_prompt_validator(u_input, result):
     from mailroom import initial_prompt_validator
@@ -59,6 +77,12 @@ def test_amount_prompt_validator(u_input, result):
 def test_amount_to_dict(u_input, u_amount, dictionary, result):
     from mailroom import amount_to_dict
     assert amount_to_dict(u_input, u_amount, dictionary) == result
+
+
+@pytest.mark.parametrize('dictionary, result', DO_MATH_TABLE)
+def test_do_math(dictionary, result):
+    from mailroom import do_math
+    assert do_math(dictionary) == result
 
 # def test_name_prompt_elif(DONOR_DICT):
 #     from mailroom import name_prompt
