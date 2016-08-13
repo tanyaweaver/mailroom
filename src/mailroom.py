@@ -91,6 +91,8 @@ def generate_letter(donor_name, donation_amount):
     """Generate thank you letter with name and new donation."""
     print(u'Dear {0}, thank you for your donation of '
           u'${1}.'.format(donor_name.capitalize(), donation_amount))
+    return (u'Dear {0}, thank you for your donation of '
+          u'${1}.'.format(donor_name.capitalize(), donation_amount))
 
 
 def do_math(dictionary):

@@ -93,4 +93,4 @@ def test_do_math():
 def test_generate_letter():
     from mailroom import generate_letter
     assert generate_letter('smith', 100) == u'Dear Smith, '\
-        u'thank you for your donation of $100.0.'
+        u'thank you for your donation of $100.'
