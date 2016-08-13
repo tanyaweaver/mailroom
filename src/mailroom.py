@@ -21,14 +21,14 @@ DONOR_DICT = {
 
 def initial_prompt():
     """Run the main menu prompt."""
-    user_menu_choice = input(u'Choose: Thank You Letter or Report '
-                             '(Q to exit) ').lower()
+    user_menu_choice = input(u'PRESS: (L) - Thank You Letter, (R) - Report, '
+                             '(Q) - Exit : ').lower()
     return user_menu_choice
 
 
 def initial_prompt_validator(user_menu_choice):
     """Validate user input from the initial_prompt."""
-    if user_menu_choice in (u'thank you letter', 'report'):
+    if user_menu_choice in (u'l', u'r'):
         return user_menu_choice
     elif user_menu_choice == 'q':
         exit()
@@ -39,8 +39,8 @@ def initial_prompt_validator(user_menu_choice):
 
 def name_prompt():
     """Prompt user for a name, or asks for list to print the names in dict."""
-    donor_name_input = input(u'Enter Donor Name or List '
-                             u'(Q to return to Main Menu) ').lower()
+    donor_name_input = input(u'Enter Donor Name ((L) - List of Donors '
+                             u'(Q) - return to Main Menu) : ').lower()
     return donor_name_input
 
 
@@ -64,7 +64,7 @@ def name_prompt_validator(donor_name_input):
 def amount_prompt():
     """Prompt for donation amount."""
     donation_amount = input(u'Enter Donation Amount  '
-                            u'(Q to return to Main Menu) ')
+                            u'((Q) - return to Main Menu) : ')
     return donation_amount
 
 
@@ -92,7 +92,7 @@ def generate_letter(donor_name, donation_amount):
     print(u'Dear {0}, thank you for your donation of '
           u'${1}.'.format(donor_name.capitalize(), donation_amount))
     return (u'Dear {0}, thank you for your donation of '
-          u'${1}.'.format(donor_name.capitalize(), donation_amount))
+            u'${1}.'.format(donor_name.capitalize(), donation_amount))
 
 
 def do_math(dictionary):
@@ -134,17 +134,17 @@ def dict_update_generate_letter(donor_name, dictionary):
 def main_function():
     """Main function for control flow"""
     user_menu_choice = initial_prompt_validator(initial_prompt())
-    if user_menu_choice == u'thank you letter':
+    if user_menu_choice == u'l':
         donor_name = name_prompt_validator(name_prompt())
-        if donor_name == u'list':
-            print(DONOR_DICT.keys())
+        while donor_name == u'l':
+            for key in DONOR_DICT:
+                print (key)
             donor_name = name_prompt_validator(name_prompt())
-        else:
-            while donor_name == u'invalid input':
-                donor_name = name_prompt_validator(name_prompt())
+        while donor_name == u'invalid input':
+            donor_name = name_prompt_validator(name_prompt())
         dict_update_generate_letter(donor_name, DONOR_DICT)
         main_function()
-    elif user_menu_choice == u'report':
+    elif user_menu_choice == u'r':
         create_report(do_math(DONOR_DICT))
         main_function()
     else:
