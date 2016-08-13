@@ -3,8 +3,8 @@ import pytest
 
 
 MENU_INPUTS = [
-    (u'thank you letter', u'thank you letter'),
-    (u'report', u'report'),
+    (u'l', u'l'),
+    (u'r', u'r'),
     (123, u'invalid input')
 ]
 
